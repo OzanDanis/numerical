@@ -347,17 +347,17 @@ double log_function(logarithmic temp, double x) {
 
 double tri_function(trigonometric temp, double x) {
     if (strcmp(temp.name, "sin") == 0) {
-        return temp.f_coef * pow(sin(temp.x_coef * pow(x, temp.x_exp) * M_PI / 180), temp.f_exp);
+        return temp.f_coef * pow(sin(temp.x_coef * pow(x, temp.x_exp)), temp.f_exp);
     } else if (strcmp(temp.name, "cos") == 0) {
-        return temp.f_coef * pow(cos(temp.x_coef * pow(x, temp.x_exp) * M_PI / 180), temp.f_exp);
+        return temp.f_coef * pow(cos(temp.x_coef * pow(x, temp.x_exp)), temp.f_exp);
     } else if (strcmp(temp.name, "tan") == 0) {
-        return temp.f_coef * pow(tan(temp.x_coef * pow(x, temp.x_exp) * M_PI / 180), temp.f_exp);
+        return temp.f_coef * pow(tan(temp.x_coef * pow(x, temp.x_exp)), temp.f_exp);
     } else if (strcmp(temp.name, "cot") == 0) {
-        return temp.f_coef * pow(1 / tan(temp.x_coef * pow(x, temp.x_exp) * M_PI / 180), temp.f_exp);
+        return temp.f_coef * pow(1 / tan(temp.x_coef * pow(x, temp.x_exp)), temp.f_exp);
     } else if (strcmp(temp.name, "sec") == 0) {
-        return temp.f_coef * pow(1 / cos(temp.x_coef * pow(x, temp.x_exp) * M_PI / 180), temp.f_exp);
+        return temp.f_coef * pow(1 / cos(temp.x_coef * pow(x, temp.x_exp)), temp.f_exp);
     } else if (strcmp(temp.name, "csc") == 0) {
-        return temp.f_coef * pow(1 / sin(temp.x_coef * pow(x, temp.x_exp) * M_PI / 180), temp.f_exp);
+        return temp.f_coef * pow(1 / sin(temp.x_coef * pow(x, temp.x_exp)), temp.f_exp);
     } else {
         printf("Invalid trigonometric function name.\n");
         return 0;
@@ -486,7 +486,7 @@ void newton_raphson(polynomial poly[], int sizep, exponential exp[], int sizex, 
         fa = 0;
         fd = 0;
         fc = 0;
-
+        
         for (i = 0; i < sizep; i++) {
             fa += poly_function(poly[i], a);
         }
@@ -538,6 +538,7 @@ void newton_raphson(polynomial poly[], int sizep, exponential exp[], int sizex, 
             fc += tri_function(tri[i], c);
         }
         step++;
+        a = c;
 
     }while(fabs(fc) > epsilon && step < 100);
 
