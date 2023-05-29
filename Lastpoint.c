@@ -337,6 +337,8 @@ void game(int arr[][MAX], int size, double *score){
 			}
 			drawBoard(arr, size);
 			*score -= tmpscores;
+			for(i=0 ; i < size ; i++) free(tempMatrix[i]);
+			free(tempMatrix);
 			
 		}
 		else if(temp == 1){
@@ -358,5 +360,4 @@ void game(int arr[][MAX], int size, double *score){
 			arr[i][j] = main_matris[i][j];
 		}
 	}
-
 }
